@@ -1,6 +1,7 @@
 import pygame
 import sys
 from grid import Grid
+from blocks import *
 
 pygame.init()
 
@@ -11,9 +12,8 @@ gridPlane = Grid()
 gridPlane.print_grid()
 
 clk = pygame.time.Clock()
-gridPlane.grid[0][0] = 1
-gridPlane.grid[3][5] = 4
-gridPlane.grid[17][8] = 7
+
+block = TBlock()
 
 
 while True:
@@ -27,6 +27,7 @@ while True:
     
     disp.fill((87,60,125))
     gridPlane.draw(disp)
+    block.draw(disp)
 
     #updates and sets tick speed to 60 
 
