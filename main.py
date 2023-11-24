@@ -4,9 +4,11 @@ from game import Game
 
 pygame.init()
 
-disp = pygame.display.set_mode((300,600))
-pygame.display.set_caption("Tetris")
+yes = pygame.font.Font(None, 80)
+gameover = yes.render("game over :c", True, (255,255,255))
 
+disp = pygame.display.set_mode((600,600))
+pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
 game = Game()
@@ -34,11 +36,18 @@ while True:
                 game.moveDown()
             if event.key == pygame.K_UP and game.gameOver == False:
                 game.rotate()
+            if event.key == pygame.K_r and game.gameOver == False:
+                game.reset()
         if event.type == game_update and game.gameOver == False:
             game.moveDown()
-        
-    disp.fill((87,60,125))
+
+                
+
+    disp.fill((55,26,70))
+    
     game.draw(disp)
+    if game.gameOver == True:
+        disp.blit(gameover,(35,80,50,50))
     #updates and sets tick speed to 60 
 
     pygame.display.update()

@@ -1,5 +1,5 @@
 class Colors:
-    gray = (50,50,50) 
+    gray = (41,19,52) 
     green = (135,214,71)
     red = (214,87,71)
     orange = (234,140,76)

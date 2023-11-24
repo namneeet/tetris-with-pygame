@@ -13,8 +13,8 @@ class Block:
         self.colors = Colors.getcolors()
 
     def move(self,row,col):
-        self.row_offset = self.row_offset + row
-        self.col_offset = self.col_offset + col
+        self.row_offset += row
+        self.col_offset += col
 
     def rotate(self):
         self.state += 1
