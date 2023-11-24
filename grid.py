@@ -15,6 +15,46 @@ class Grid:
                 print(self.grid[row][col], end = " ")
             print()
 
+    def inside(self,row,col):
+        if row>=0 and row<self.rows and col<self.cols and col>=0:
+            return True
+        return False
+
+    def empty(self,row,col):
+        if self.grid[row][col] == 0:
+            return True
+        return False
+    
+    def rowFull(self,row):
+        for i in range(self.cols):
+            if self.grid[row][i] == 0:
+                return False
+        return True
+
+    def clear(self,row):
+        for i in range(self.cols):
+            self.grid[row][i] = 0
+
+    def moveRow(self,row,numRows):
+        for i in range(self.cols):
+            self.grid[row+numRows][i] = self.grid[row][i]
+            self.grid[row][i] = 0
+
+    def clearRow(self):
+        completed = 0
+        for i in range(self.rows-1,0,-1):
+            if self.rowFull(i):
+                self.clear(i)
+                completed += 1
+            elif completed > 0:
+                self.moveRow(i,completed)
+        return completed
+
+    def reset(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.grid[i][j] = 0
+
     def draw(self, screen):
         for row in range(self.rows):
             for col in range(self.cols):
