@@ -8,6 +8,9 @@ yes = pygame.font.Font(None, 80)
 gameover = yes.render("game over :c", True, (255,255,255))
 
 disp = pygame.display.set_mode((600,600))
+player1_rect = pygame.Rect(0,0,300,600)
+player2_rect = pygame.Rect(300,0,300,600)
+
 pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
@@ -58,8 +61,9 @@ while True:
 
                 
 
-    disp.fill((55,26,70))
-    
+    disp.fill('#000000',player1_rect)
+    disp.fill('#FFFFFF',player2_rect)
+
     game1.draw(disp)
     game2.draw(disp)
     if game1.gameOver == True or game2.gameOver == True:
