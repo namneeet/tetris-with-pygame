@@ -3,7 +3,8 @@ from blocks import *
 import random
 
 class Game:
-    def __init__(self):
+    def __init__(self,offset):
+        self.offset = offset
         self.grid = Grid()
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         self.cur = self.getRandomBlock()
@@ -63,5 +64,5 @@ class Game:
                 return False
         return True
     def draw(self,screen):
-        self.grid.draw(screen)
-        self.cur.draw(screen)
+        self.grid.draw(screen,self.offset)
+        self.cur.draw(screen,self.offset)

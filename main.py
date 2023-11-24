@@ -11,7 +11,9 @@ disp = pygame.display.set_mode((600,600))
 pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
-game = Game()
+game1 = Game(0)
+game2 = Game(300)
+
 
 game_update = pygame.USEREVENT
 pygame.time.set_timer(game_update, 150)
@@ -24,30 +26,44 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        
         if event.type == pygame.KEYDOWN:
-            if game.gameOver == True:
-                game.gameOver = False
-                game.reset()
-            if event.key == pygame.K_LEFT and game.gameOver == False:
-                game.moveLeft()
-            if event.key == pygame.K_RIGHT and game.gameOver == False:
-                game.moveRight()
-            if event.key == pygame.K_DOWN and game.gameOver == False:
-                game.moveDown()
-            if event.key == pygame.K_UP and game.gameOver == False:
-                game.rotate()
-            if event.key == pygame.K_r and game.gameOver == False:
-                game.reset()
-        if event.type == game_update and game.gameOver == False:
-            game.moveDown()
+            if game1.gameOver == True or game2.gameOver == True:
+                game1.gameOver = False
+                game2.gameOver = False
+                game1.reset()
+                game2.reset()
+            if event.key == pygame.K_LEFT and game2.gameOver == False:
+                game2.moveLeft()
+            if event.key == pygame.K_RIGHT and game2.gameOver == False:
+                game2.moveRight()
+            if event.key == pygame.K_DOWN and game2.gameOver == False:
+                game2.moveDown()
+            if event.key == pygame.K_UP and game2.gameOver == False:
+                game2.rotate()
+            if event.key == pygame.K_r and game2.gameOver == False:
+                game1.reset()
+                game2.reset()
+            if event.key == pygame.K_a and game1.gameOver == False:
+                game1.moveLeft()
+            if event.key == pygame.K_d and game1.gameOver == False:
+                game1.moveRight()
+            if event.key == pygame.K_s and game1.gameOver == False:
+                game1.moveDown()
+            if event.key == pygame.K_w and game1.gameOver == False:
+                game1.rotate()
+        if event.type == game_update and game1.gameOver == False and game2.gameOver == False:
+            game1.moveDown()
+            game2.moveDown()
 
                 
 
     disp.fill((55,26,70))
     
-    game.draw(disp)
-    if game.gameOver == True:
-        disp.blit(gameover,(35,80,50,50))
+    game1.draw(disp)
+    game2.draw(disp)
+    if game1.gameOver == True or game2.gameOver == True:
+        disp.blit(gameover,(110,260,50,50))
     #updates and sets tick speed to 60 
 
     pygame.display.update()
