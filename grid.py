@@ -8,6 +8,7 @@ class Grid:
         self.grid = [[0 for j in range(self.cols)] for i in range(self.rows)]
         #gray,green,red,yellow,purple,cyan,blue
         self.colors = Colors.getcolors()
+        self.score = 0
 
     def print_grid(self):
         for row in range(self.rows):
@@ -41,14 +42,13 @@ class Grid:
             self.grid[row][i] = 0
 
     def clearRow(self):
-        completed = 0
         for i in range(self.rows-1,0,-1):
             if self.rowFull(i):
                 self.clear(i)
-                completed += 1
-            elif completed > 0:
-                self.moveRow(i,completed)
-        return completed
+                self.score += 1
+            elif self.score > 0:
+                self.moveRow(i,self.score)
+
 
     def reset(self):
         for i in range(self.rows):
