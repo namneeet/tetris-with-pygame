@@ -9,6 +9,7 @@ class Game:
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         self.cur = self.getRandomBlock()
         self.next = self.getRandomBlock()
+        self.score = 0
         self.gameOver = False
 
     def getRandomBlock(self):
