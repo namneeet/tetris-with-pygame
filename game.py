@@ -4,6 +4,7 @@ import random
 
 class Game:
     def __init__(self,offset):
+        self.score = 0
         self.offset = offset
         self.grid = Grid()
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
@@ -17,7 +18,7 @@ class Game:
         block = random.choice(self.blocks)
         self.blocks.remove(block)
         return block
-    
+
     def moveLeft(self): 
         self.cur.move(0,-1)
         if self.blockInside() == False or self.blockFits() == False:
@@ -37,7 +38,7 @@ class Game:
             self.grid.grid[i.row][i.col] = self.cur.type
         self.cur = self.next
         self.next = self.getRandomBlock()
-        self.grid.clearRow()
+        self.score += 100*self.grid.clearRow()
         if self.blockFits() == False:
             self.gameOver=True
 
@@ -46,6 +47,7 @@ class Game:
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         self.cur = self.getRandomBlock()
         self.next = self.getRandomBlock()
+        self.score = 0
     
     def blockFits(self):
         tiles = self.cur.getCellPos()

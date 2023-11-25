@@ -59,5 +59,5 @@ class Grid:
         for row in range(self.rows):
             for col in range(self.cols):
                 val = self.grid[row][col]
-                rect = pygame.Rect(col*self.size+1+offset,row*self.size+1,self.size-1,self.size-1)
+                rect = pygame.Rect(col*self.size+1+offset,row*self.size+91,self.size-1,self.size-1)
                 pygame.draw.rect(screen, self.colors[val],rect)

@@ -5,9 +5,8 @@ from game import Game
 pygame.init()
 
 yes = pygame.font.Font(None, 80)
-gameover = yes.render("game over :c", True, (255,255,255))
 
-disp = pygame.display.set_mode((630,600))
+disp = pygame.display.set_mode((630,690))
 pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
@@ -17,6 +16,8 @@ game2 = Game(330)
 
 game_update = pygame.USEREVENT
 pygame.time.set_timer(game_update, 150)
+
+
 
 while True:
 
@@ -29,10 +30,12 @@ while True:
         
         if event.type == pygame.KEYDOWN:
             if game1.gameOver == True or game2.gameOver == True:
+                
                 game1.gameOver = False
                 game2.gameOver = False
                 game1.reset()
                 game2.reset()
+
             if event.key == pygame.K_LEFT and game2.gameOver == False:
                 game2.moveLeft()
             if event.key == pygame.K_RIGHT and game2.gameOver == False:
@@ -55,15 +58,27 @@ while True:
         if event.type == game_update and game1.gameOver == False and game2.gameOver == False:
             game1.moveDown()
             game2.moveDown()
+            game1.score += 1
+            game2.score += 1
+        
+              
 
-                
 
     disp.fill((55,26,70))
     
     game1.draw(disp)
     game2.draw(disp)
+    score1 = yes.render(str(game1.score), True, (255,255,255))
+    score2 = yes.render(str(game2.score), True, (255,255,255))
+
+    disp.blit(score1,(130,25,50,50))
+    disp.blit(score2,(460,25,50,50))
     if game1.gameOver == True or game2.gameOver == True:
-        disp.blit(gameover,(140,260,50,50))
+        gameOverDisplay = yes.render("game over :c", True, (255,255,255))
+        disp.blit(gameOverDisplay,(140,300,50,50))
+
+
+
     #updates and sets tick speed to 60 
 
     pygame.display.update()
