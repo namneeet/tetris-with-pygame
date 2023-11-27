@@ -16,13 +16,9 @@ pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
 game1 = Game(0)
-<<<<<<< Updated upstream
-game2 = Game(300)
-=======
 game2 = Game(330)
 score = None
 check = False
->>>>>>> Stashed changes
 
 if not score:
     score = Score()
@@ -76,14 +72,10 @@ while True:
     game1.draw(disp)
     game2.draw(disp)
     if game1.gameOver == True or game2.gameOver == True:
-<<<<<<< Updated upstream
-        disp.blit(gameover,(110,260,50,50))
-=======
         gameOverDisplay = yes.render("game over :c", True, (255,255,255))
         disp.blit(gameOverDisplay,(140,300,50,50))
         
 
->>>>>>> Stashed changes
     #updates and sets tick speed to 60 
 
     pygame.display.update()
