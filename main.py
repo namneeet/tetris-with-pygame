@@ -1,6 +1,7 @@
 import pygame
 import sys
 from game import Game
+from score import Score
 
 pygame.init()
 
@@ -15,8 +16,16 @@ pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
 game1 = Game(0)
+<<<<<<< Updated upstream
 game2 = Game(300)
+=======
+game2 = Game(330)
+score = None
+check = False
+>>>>>>> Stashed changes
 
+if not score:
+    score = Score()
 
 game_update = pygame.USEREVENT
 pygame.time.set_timer(game_update, 150)
@@ -67,8 +76,33 @@ while True:
     game1.draw(disp)
     game2.draw(disp)
     if game1.gameOver == True or game2.gameOver == True:
+<<<<<<< Updated upstream
         disp.blit(gameover,(110,260,50,50))
+=======
+        gameOverDisplay = yes.render("game over :c", True, (255,255,255))
+        disp.blit(gameOverDisplay,(140,300,50,50))
+        
+
+>>>>>>> Stashed changes
     #updates and sets tick speed to 60 
 
     pygame.display.update()
     clk.tick(60)
+
+    if game1.gameOver or game2.gameOver:
+        if game1.score >= game2.score:
+            check = score.check(game1.score)
+            if check:
+                print("pass here")
+                name = input("Enter Your Name")
+                point = game1.score
+                score.save(name, point)
+        else:
+            check = score.check(game2.score)
+            if check:
+                print("pass here")
+                name = input("Enter Your Name")
+                point = game2.score
+                score.save(name, point)
+        score.display2()
+    
