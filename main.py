@@ -1,12 +1,16 @@
 import pygame
 import sys
+import pandas as pd
 from game import Game
+from score import Score
 
 pygame.init()
 
 yes = pygame.font.Font(None, 80)
+yes2 = pygame.font.Font(None, 60)
 
-disp = pygame.display.set_mode((630,690))
+ 
+disp = pygame.display.set_mode((1030,690))
 pygame.display.set_caption("Tetris")
 clk = pygame.time.Clock()
 
@@ -14,8 +18,17 @@ game1 = Game(0)
 game2 = Game(330)
 
 
+# ----------------------- SCORES ------------------------
+
+score = Score()
+lb = []
+
+
+# ----------------------- ------ ------------------------
+
+
 game_update = pygame.USEREVENT
-pygame.time.set_timer(game_update, 150)
+pygame.time.set_timer(game_update, 80)
 
 
 
@@ -31,8 +44,13 @@ while True:
         if event.type == pygame.KEYDOWN:
             if game1.gameOver == True or game2.gameOver == True:
                 
+                score.addScore("P1",game1.score)
+                score.addScore("P2",game2.score)
+                lb = score.display().split("\n")
+                    
                 game1.gameOver = False
                 game2.gameOver = False
+                
                 game1.reset()
                 game2.reset()
 
@@ -70,6 +88,10 @@ while True:
     game2.draw(disp)
     score1 = yes.render(str(game1.score), True, (255,255,255))
     score2 = yes.render(str(game2.score), True, (255,255,255))
+
+    for i in range(len(lb)):
+        lbDisp = yes2.render(lb[i], True, (255,255,255))
+        disp.blit(lbDisp,(750,25 + 60*i,50,50))
 
     disp.blit(score1,(130,25,50,50))
     disp.blit(score2,(460,25,50,50))
