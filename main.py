@@ -28,7 +28,7 @@ lb = []
 
 
 game_update = pygame.USEREVENT
-pygame.time.set_timer(game_update, 80)
+pygame.time.set_timer(game_update, 120)
 
 
 
