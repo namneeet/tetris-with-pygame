@@ -1,5 +1,5 @@
 # tetris-with-pygame
-tetris with pygame! :)
+##tetris with pygame! :)
 
 ###Summary
 
